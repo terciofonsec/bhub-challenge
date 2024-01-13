@@ -1,5 +1,6 @@
 package com.bhub.challenge.service;
 
+import com.bhub.challenge.message.DeliveryNotePublisher;
 import com.bhub.challenge.model.DeliveryNoteDocument;
 import com.bhub.challenge.repository.DeliveryNoteRepository;
 import com.bhub.challenge.resource.apiobjects.DeliveryNoteRequest;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 public class DeliveryNoteService {
 
     private final ModelMapper mapper;
+    private final DeliveryNotePublisher publisher;
     private final DeliveryNoteRepository repository;
 
 
@@ -23,9 +25,11 @@ public class DeliveryNoteService {
             log.info("creating delivery note: {}", deliveryNoteRequest);
             DeliveryNoteDocument deliveryNoteDocument = mapper.map(deliveryNoteRequest, DeliveryNoteDocument.class);
             repository.save(deliveryNoteDocument);
-            log.info("Delivery note created, documentId: {}", deliveryNoteDocument.getId());
+            publisher.sendEvent(deliveryNoteDocument);
+            log.info("Delivery note created and published, documentId: {}", deliveryNoteDocument.getId());
         }catch (Exception e){
             log.error("Error on creating delivery note on database, deliveryNoteRequest={}", deliveryNoteRequest);
         }
     }
+
 }
