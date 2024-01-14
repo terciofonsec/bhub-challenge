@@ -1,0 +1,20 @@
+[
+  {
+    "id": "033d55d9-4dd0-4e81-a96d-c0fbdd8dd3d7",
+    "createDate":{"$date": "2022-03-01T12:34:56.789Z"},
+    "updateDate": {"$date": "2022-03-01T12:34:56.789Z"},
+    "department": "department-1",
+    "userId": "033d55d9-4dd0-4e81-a96d-c0fbdd8dd3d7",
+    "checkoutOrderId": "033d55d9-4dd0-4e81-a96d-c0fbdd8dd3d7",
+    "status": "CREATED"
+  },
+  {
+    "id": "033d55d9-4dd0-4e81-a96d-c0fbdd8dd3d6",
+    "createDate": {"$date": "2022-03-01T12:34:56.789Z"},
+    "updateDate": {"$date": "2022-03-01T12:34:56.789Z"},
+    "department": "department-2",
+    "userId": "033d55d9-4dd0-4e81-a96d-c0fbdd8dd3d6",
+    "checkoutOrderId": "033d55d9-4dd0-4e81-a96d-c0fbdd8dd3d6",
+    "status": "PROCESSING"
+  }
+]

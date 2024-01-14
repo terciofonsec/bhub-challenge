@@ -6,7 +6,6 @@ import jakarta.validation.constraints.NotNull;
 import java.util.UUID;
 
 public record DeliveryNoteRequest(
-        @NotNull UUID id,
         @NotNull UUID userId,
         @NotNull UUID checkoutOrderId,
         @NotBlank String department
