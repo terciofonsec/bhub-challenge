@@ -1,0 +1,12 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/testdb
+
+
+logging:
+  level:
+    org:
+      springframework:
+        boot:
+          autoconfigure: DEBUG
