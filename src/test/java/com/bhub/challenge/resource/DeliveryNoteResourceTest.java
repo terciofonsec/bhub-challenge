@@ -11,6 +11,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.bhub.challenge.message.DeliveryNotePublisher;
 import com.bhub.challenge.model.DeliveryNoteDocument;
+import com.bhub.challenge.model.DeliveryNoteDocument.DeliveryNoteStatus;
 import com.bhub.challenge.repository.DeliveryNoteRepository;
 import com.bhub.challenge.resource.apiobjects.DeliveryNoteRequest;
 import com.bhub.challenge.stub.DeliveryNoteStub;
@@ -22,6 +23,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
@@ -41,11 +43,14 @@ public class DeliveryNoteResourceTest {
   private DeliveryNotePublisher publisher;
 
   @Test
+  @DirtiesContext
   public void givenNewDeliveryNoteRequest_whenEndpointIsCalled_thenResponseShouldBe201()
       throws Exception {
 
     //given
     DeliveryNoteRequest deliveryNoteRequest = DeliveryNoteStub.gimmeDeliveryNoteRequest();
+
+    when(repository.save(any())).thenReturn(DeliveryNoteStub.gimmeDeliveryNoteDocumentCreated(DeliveryNoteStatus.CREATED));
 
     //when
     mockMvc.perform(MockMvcRequestBuilders.post("/delivery-notes")

@@ -1,5 +1,6 @@
 package com.bhub.challenge.stub;
 
+import com.bhub.challenge.dto.DeliveryNoteDTO;
 import com.bhub.challenge.model.DeliveryNoteDocument;
 import com.bhub.challenge.resource.apiobjects.DeliveryNoteRequest;
 
@@ -12,6 +13,10 @@ public class DeliveryNoteStub {
     return new DeliveryNoteRequest(UUID.randomUUID(), UUID.randomUUID(), "First department");
   }
 
+  public static DeliveryNoteDTO gimmeDeliveryNoteDTO(){
+    return new DeliveryNoteDTO(null, UUID.randomUUID(), UUID.randomUUID(), "First department");
+  }
+
   public static DeliveryNoteRequest gimmeDeliveryNoteRequest(UUID userID, UUID checkoutOrderId,
       String department) {
     return new DeliveryNoteRequest(userID, checkoutOrderId, department);
@@ -21,28 +26,28 @@ public class DeliveryNoteStub {
     return new DeliveryNoteRequest(null, null, "");
   }
 
-  public static DeliveryNoteDocument gimmeDeliveryNoteDocumentCreated(DeliveryNoteRequest request,
+  public static DeliveryNoteDocument gimmeDeliveryNoteDocumentCreated(DeliveryNoteDTO request,
       DeliveryNoteDocument.DeliveryNoteStatus status) {
     return new DeliveryNoteDocument(
         UUID.randomUUID().toString(),
+        request.getDepartment(),
+        request.getUserId(),
+        request.getCheckoutOrderId(),
+        status,
         LocalDateTime.now(),
-        LocalDateTime.now(),
-        request.department(),
-        request.userId(),
-        request.checkoutOrderId(),
-        status);
+        LocalDateTime.now());
   }
 
   public static DeliveryNoteDocument gimmeDeliveryNoteDocumentCreated(
       DeliveryNoteDocument.DeliveryNoteStatus status) {
     return new DeliveryNoteDocument(
         UUID.randomUUID().toString(),
-        LocalDateTime.now(),
-        LocalDateTime.now(),
         "department",
         UUID.randomUUID(),
         UUID.randomUUID(),
-        status);
+        status,
+        LocalDateTime.now(),
+        LocalDateTime.now());
   }
 }
 
